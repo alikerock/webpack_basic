@@ -9,11 +9,12 @@ module.exports = {
     //웹팩을 통한 번들링(묶기) 시작점
     //index: "./src/index.js"
     index: path.join(__dirname, "src", "index.js"),
+    about: path.join(__dirname, "src", "about.js"),//about 엔트리 추가
   },
   output: {
     // 하나의 파일로 번들링한 결과물을 설정
     path: path.resolve(__dirname, "dist"),
-    filename: "./js/[name].js",
+    filename: "js/[name].js",
   },
   devServer: {
     static: "./dist",
@@ -26,12 +27,14 @@ module.exports = {
       filename: "./index.html", // 결과 파일명
       hash: true, // 모든 스크립트, css 파일에 고유한 컴파일 해시 추가하여 캐시를 무효화
       showErrors: true, // 오류 정보가 html에 기록됨
+      chunks:["index"]
     }),
     new HtmlWebpackPlugin({
       template: "./src/about.html",
       filename: "./about.html",
       hash: true,
       showErrors: true,
+      chunks:["about"]
     }),
     new MiniCssExtractPlugin({
       filename: "./css/style.css",
